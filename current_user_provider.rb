@@ -10,8 +10,9 @@ class ExCurrentUserProvider < Auth::DefaultCurrentUserProvider
     payload = {  id: user.id, username: user.username, name: user.name,
      admin:user.admin, moderator:user.moderator, trust_level: user.trust_level,
      avatar_template: user.avatar_template, title: user.title,
-     groups: user.groups, locale: user.locale,
-     silenced_till: user.silenced_till , staged: user.staged, active: user.active}
+     groups: user.groups.map{|i| i.name}, locale: user.locale,
+     silenced_till: user.silenced_till , staged: user.staged, active: user.active,
+                 created_at:user.created_at, updated_at:user.updated_at }
     payload_sha = Digest::SHA256.hexdigest payload.to_json
     hash_function = OpenSSL::Digest.new('sha256')
     hmac = OpenSSL::HMAC.hexdigest(hash_function, SiteSetting.cookie_ui_key, payload_sha)
@@ -20,7 +21,7 @@ class ExCurrentUserProvider < Auth::DefaultCurrentUserProvider
     cookies.permanent[TOKEN_COOKIX] = { value: token, httponly: true, domain: :all }
 
   end
-  
+
   def log_off_user(session, cookies)
     super
 
