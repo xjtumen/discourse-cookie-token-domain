@@ -5,3 +5,6 @@ plugins:
   cookie_ui_key:
     default: key_very_random
     client: false
+  cookie_ui_name:
+    default: logged_in
+    client: false

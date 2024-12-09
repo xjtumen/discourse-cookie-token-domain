@@ -1,4 +1,5 @@
 en:
   site_settings:
     cookie_ui_enabled: 'Activate Cookie-token plugin ?'
-    cookie_ui_key: 'Enter the secret key 16 char length min'
+    cookie_ui_name: 'Enter the name of cookie'
+    cookie_ui_key: 'Enter the secret key'
